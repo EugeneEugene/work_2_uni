@@ -3,7 +3,30 @@
 #include <sstream>
 #include <fstream>
 #include <cstdio>
-using namespace std;
+using namespace std; 
+
+int *count_vowels = new int; 
+int *count_consonants = new int; 
+
+void count_vowels_consonants(string line)
+{   
+    for(int i = 0; i < line.length(); ++i)
+    { 
+        if(isalpha(line[i]) != 0) {
+            if(line[i]=='a' || line[i]=='e' || line[i]=='i' ||
+                line[i]=='o' || line[i]=='u' || line[i]=='A' ||
+                line[i]=='E' || line[i]=='I' || line[i]=='O' ||
+                line[i]=='U')
+            { 
+                (*count_vowels)++;
+            } 
+            else
+            {
+                (*count_consonants)++;
+            }
+        }
+    }
+}
 
 void openFile()
 {
@@ -15,7 +38,8 @@ void openFile()
         string line;
         while(getline(fileStream, line))
         {
-            cout << line << endl;
+            cout << line << endl; 
+            count_vowels_consonants(line);
         }          
         fileStream.close();
     }
@@ -24,10 +48,12 @@ void openFile()
     {
         printf("Not success!");
     }
-}
+} 
 
 int main()
 {
-    openFile();
+    openFile(); 
+    printf("vowels: %d\n", *count_vowels); 
+    printf("consonants: %d\n", *count_consonants);
     return 0;
 }
