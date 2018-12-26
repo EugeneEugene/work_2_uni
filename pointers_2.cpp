@@ -12,15 +12,16 @@ int *count_consonants = new int;
 char **arr_of_txt; 
 int *row = new int;
 
-void printArr(char ** arr)
+void printArr(char ** arr, int count_of_lines)
 {
-    for(int i = 0; i< sizeof arr / sizeof arr[0]; i++)
+    for(int i = 0; i< count_of_lines; i++)
     {
-        for(int j=0; j<(sizeof arr[i] / sizeof(char)) + 1; j++)
+        int j = 0; 
+        while(arr[i][j] != '\0')
         {
-            printf("%c", arr[i][j]);
-        } 
-        printf("\n");
+            printf("%c", arr[i][j]); 
+            j++;
+        }
     }
 }
 
@@ -70,8 +71,47 @@ void openFile()
             } 
             ++i;
         }      
-        printArr(arr_of_txt);
+  
+        ofstream outStream;
+        outStream.open("out.txt"); 
+        if(outStream.is_open())
+        {
+        for(int i = 0; i< *row; i++)
+        {
+        int j = 0; 
+        while(arr_of_txt[i][j] != '\0')
+        {
+            outStream << arr_of_txt[i][j];
+            j++;
+        }
+        if(i !=(*row) -1)
+        {
+            outStream << "\n";
+        }
+    }
 
+        ofstream reverseStream;
+        reverseStream.open("reverse.txt"); 
+        if(reverseStream.is_open())
+        {
+        for(int i = *row -1; i >= 0; i--)
+        {
+        int j = 0; 
+        while(arr_of_txt[i][j] != '\0')
+        { 
+            printf("kek");
+            reverseStream << arr_of_txt[i][j];
+            j++;
+        }
+        if(i >*row)
+        {
+            reverseStream << "\n";
+        }
+    }
+        }
+
+
+        }
     }
     
     else
@@ -79,6 +119,11 @@ void openFile()
         printf("Not success!");
     }
 } 
+
+void copy_string_to_file()
+{
+
+}
 
 int main()
 {
