@@ -1,12 +1,3 @@
-if (isalpha(str[i]) != 0) 
-            alphabet++; 
-  
-        // check for decimal digits 
-        else if (isdigit(str[i]) != 0) 
-            number++; 
-    } 
-  
-    printf("Alphabetic_letters = %d, "
-           "Decimal_digits = %d\n", alphabet, number); 
-  
-    return 0; 
+aaaaaa
+bbbb
+cc

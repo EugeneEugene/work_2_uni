@@ -2,11 +2,27 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include <cstdio>
+#include <cstdio> 
+#include <stdio.h>
+#include <string.h>
 using namespace std; 
 
 int *count_vowels = new int; 
-int *count_consonants = new int; 
+int *count_consonants = new int;
+char **arr_of_txt; 
+int *row = new int;
+
+void printArr(char ** arr)
+{
+    for(int i = 0; i< sizeof arr / sizeof arr[0]; i++)
+    {
+        for(int j=0; j<(sizeof arr[i] / sizeof(char)) + 1; j++)
+        {
+            printf("%c", arr[i][j]);
+        } 
+        printf("\n");
+    }
+}
 
 void count_vowels_consonants(string line)
 {   
@@ -38,10 +54,24 @@ void openFile()
         string line;
         while(getline(fileStream, line))
         {
-            cout << line << endl; 
             count_vowels_consonants(line);
+            (*row)++;
         }          
         fileStream.close();
+        arr_of_txt = new char*[*row];
+        fileStream.open("example.txt");  
+        int i = 0;
+        while(getline(fileStream, line))
+        {
+            arr_of_txt[i] = new char[line.length() + 1]; 
+            for(int j = 0; j< line.length() + 1; j++)
+            {
+                arr_of_txt[i][j] = line[j]; 
+            } 
+            ++i;
+        }      
+        printArr(arr_of_txt);
+
     }
     
     else
